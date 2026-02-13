@@ -125,14 +125,14 @@ export function RecLetterBriefPage({ targetId }: { targetId: TargetId }) {
   );
 
   const overviewPane = (
-    <Pane title="Overview" className="h-full" hint="Context and emphasis guidance for the letter." accentHue={accentHue}>
+    <Pane title="I. Overview" className="h-full" hint="Context and emphasis guidance for the letter." accentHue={accentHue}>
       <Card className="scroll-mt-12">
         <CardHeader title={sharedContent.heroTitle} />
         <p className="text-sm text-neutral-300">{sharedContent.heroSubhead}</p>
         <p className="text-xs text-neutral-400">{sharedContent.metadata}</p>
       </Card>
 
-      <Section title="Courses taught (recent)">
+      <Section title="a. Courses taught (recent)">
         <Card>
           <ul className="list-disc pl-4 space-y-1 marker:text-neutral-600 text-[13px] leading-5 text-neutral-200">
             {sharedContent.courses.map((course) => (
@@ -142,7 +142,7 @@ export function RecLetterBriefPage({ targetId }: { targetId: TargetId }) {
         </Card>
       </Section>
 
-      <Section title="Recommended emphasis">
+      <Section title="b. Recommended emphasis">
         <Card>
           <ol className="list-decimal pl-4 space-y-1 marker:text-neutral-600 text-[13px] leading-5 text-neutral-200">
             {contentByTarget[targetId].emphasis.map((item) => (
@@ -155,8 +155,8 @@ export function RecLetterBriefPage({ targetId }: { targetId: TargetId }) {
   );
 
   const claimsPane = (
-    <Pane title="Claims" className="h-full" hint="Ready-to-cite claims and recent evidence." accentHue={accentHue}>
-      <Section title="5 claims you can safely make" descriptor={sectionDescriptors.claims}>
+    <Pane title="II. Claims" className="h-full" hint="Ready-to-cite claims and recent evidence." accentHue={accentHue}>
+      <Section title="a. 5 claims you can safely make" descriptor={sectionDescriptors.claims}>
         {claims.map((item, index) => (
           <Card key={item.claim}>
             <CardHeader
@@ -219,7 +219,7 @@ export function RecLetterBriefPage({ targetId }: { targetId: TargetId }) {
         </Card>
       </Section>
 
-      <Section title="Recent work highlights" descriptor={sectionDescriptors.highlights}>
+      <Section title="b. Recent work highlights" descriptor={sectionDescriptors.highlights}>
         {highlightCards.map((item) => (
           <Card key={item.title}>
             <CardHeader title={item.title} subtext={item.what} action={<Chip label={item.variant} variant={item.variant} />} />
@@ -244,16 +244,16 @@ export function RecLetterBriefPage({ targetId }: { targetId: TargetId }) {
   );
 
   const kitPane = (
-    <Pane title="Letter kit" className="h-full" hint="Copy-ready paragraphs and submission logistics." accentHue={accentHue}>
+    <Pane title="III. Letter kit" className="h-full" hint="Copy-ready paragraphs and submission logistics." accentHue={accentHue}>
       <p className="border border-neutral-800 bg-neutral-900/40 p-2 text-xs text-neutral-300 lg:hidden">You may want to skim Overview/Claims first.</p>
 
-      <Section title="Letter-writing kit" descriptor={sectionDescriptors.kit}>
+      <Section title="a. Letter-writing kit" descriptor={sectionDescriptors.kit}>
         <ParagraphCard title="Paragraph 1" text={sharedContent.coreParagraph} onCopied={showCopied} className="scroll-mt-12" />
         <ParagraphCard title="Paragraph 2" text={contentByTarget[targetId].roleParagraph} onCopied={showCopied} />
         <ParagraphCard title="Paragraph 3" text={sharedContent.closingStarter} onCopied={showCopied} />
       </Section>
 
-      <Section title="How to submit letters">
+      <Section title="b. How to submit letters">
         {contentByTarget[targetId].logistics.map((item) => (
           <Card key={item.school}>
             <CardHeader title={item.school} />
