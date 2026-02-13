@@ -28,27 +28,27 @@ export const softwarePalette = {
   items: [
     {
       title: 'SyncTimer',
-      url: 'https://example.com/synctimer',
+      url: 'https://synctimerapp.com',
       contains: 'Contains: interactive rehearsal synchronization + cue sheets for ensembles.',
     },
     {
       title: 'Tenney',
-      url: 'https://example.com/tenney',
+      url: 'https://tenneyapp.com',
       contains: 'Contains: just-intonation practice tools and lattice exploration workflow.',
     },
     {
       title: 'Viable Prompt Protocol',
-      url: 'https://example.com/viable-prompt-protocol',
+      url: 'https://viableprompt.org',
       contains: 'Contains: repeatable prompt iteration templates for creative development.',
     },
     {
       title: 'Praetorius',
-      url: 'https://example.com/praetorius',
+      url: 'https://cbassuarez.github.io/praetorius',
       contains: 'Contains: audio-linked PDF publishing workflow with responsive portfolio views.',
     },
     {
       title: 'Flux',
-      url: 'https://example.com/flux',
+      url: 'https://fluxspec.org',
       contains: 'Contains: reactive score tooling for live performance process control.',
     },
   ],
@@ -152,7 +152,7 @@ export const claims = [
       'Software materials capture concrete tools used in rehearsal, tuning, and publishing.',
       'Artifacts tie implementation details to musical outcomes without marketing framing.',
     ],
-    link: 'https://example.com/software',
+    link: 'https://stagedevices.com',
   },
 ] as const;
 
@@ -175,31 +175,31 @@ export const highlights = {
       title: 'SyncTimer',
       what: 'Rehearsal synchronization tool for shared timing references.',
       bullets: ['Demonstrates timeline-focused ensemble workflow.', 'Contains: documentation of pedagogical or rehearsal use.'],
-      link: 'https://example.com/software',
+      link: 'https://synctimerapp.com',
     },
     {
       title: 'Tenney',
       what: 'Just-intonation tuner and lattice utility up to 31-limit.',
       bullets: ['Demonstrates tuning practice support.', 'Contains: source-linked interface demonstrating system design.'],
-      link: 'https://example.com/software',
+      link: 'https://tenneyapp.com/community',
     },
     {
       title: 'Viable Prompt Protocol',
       what: 'Protocol framing for consistent prompt-driven creative iteration.',
       bullets: ['Demonstrates process documentation and revision discipline.', 'Contains: live interactive demo and technical overview.'],
-      link: 'https://example.com/software',
+      link: 'https://viableprompt.com/spec/',
     },
     {
       title: 'Praetorius',
       what: 'Audio-linked PDF + responsive portfolio publishing workflow.',
       bullets: ['Demonstrates publication pipeline design.', 'Contains: source-linked interface demonstrating system design.'],
-      link: 'https://example.com/software',
+      link: 'https://cbassuarez.github.io/praetorius',
     },
     {
       title: 'Flux',
       what: 'Reactive score and process system for performance contexts.',
       bullets: ['Demonstrates compositional system design.', 'Contains: premiere documentation, instrumentation, and performance context suitable for citation.'],
-      link: 'Suarez-Solis_Sebastian_Submission_Packet.pdf',
+      link: 'https://fluxspec.org',
     },
   ],
   music: [
