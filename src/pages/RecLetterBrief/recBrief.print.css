@@ -1,0 +1,6 @@
+@media print {
+  body { background: #fff !important; color: #000 !important; }
+  .rec-brief-page, .rec-brief-page * { color: #000 !important; background: #fff !important; box-shadow: none !important; }
+  .rec-brief-page a[href]::after { content: ' (' attr(href) ')'; font-size: 10px; }
+  .rec-brief-page .print-hide { display: none !important; }
+}

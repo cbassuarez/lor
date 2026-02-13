@@ -1,34 +1,31 @@
-import { useState } from 'react';
-import { Toast } from './Toast';
+import { Clipboard } from 'lucide-react';
 
-async function fallbackCopy(text: string) {
-  const ta = document.createElement('textarea');
-  ta.value = text;
-  document.body.appendChild(ta);
-  ta.select();
-  document.execCommand('copy');
-  document.body.removeChild(ta);
-}
+type Props = { text: string; onCopied: () => void; label?: string; className?: string };
 
-export function CopyButton({ text, label = 'Copy' }: { text: string; label?: string }) {
-  const [show, setShow] = useState(false);
-
-  const onCopy = async () => {
+export function CopyButton({ text, onCopied, label = 'Copy', className = '' }: Props) {
+  const copy = async () => {
     try {
       await navigator.clipboard.writeText(text);
+      onCopied();
+      return;
     } catch {
-      await fallbackCopy(text);
+      const area = document.createElement('textarea');
+      area.value = text;
+      area.style.position = 'fixed';
+      area.style.opacity = '0';
+      document.body.appendChild(area);
+      area.focus();
+      area.select();
+      document.execCommand('copy');
+      document.body.removeChild(area);
+      onCopied();
     }
-    setShow(true);
-    window.setTimeout(() => setShow(false), 1500);
   };
 
   return (
-    <span>
-      <button onClick={onCopy} className="rounded border border-slate-300 bg-white px-2 py-1 text-xs hover:bg-slate-100">
-        {label}
-      </button>
-      <Toast show={show} text="Copied" />
-    </span>
+    <button onClick={copy} className={`inline-flex items-center gap-1 rounded-none border border-neutral-700 px-2 py-1 text-xs text-neutral-100 hover:bg-neutral-800 ${className}`}>
+      <Clipboard className="h-3.5 w-3.5" />
+      {label}
+    </button>
   );
 }
