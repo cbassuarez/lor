@@ -1,0 +1,17 @@
+@media print {
+  #overview .print\:hidden,
+  nav,
+  select,
+  button {
+    display: none !important;
+  }
+
+  section {
+    break-inside: avoid;
+    box-shadow: none !important;
+  }
+
+  .print\:block {
+    display: block !important;
+  }
+}
