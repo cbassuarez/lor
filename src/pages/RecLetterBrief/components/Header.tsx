@@ -1,4 +1,3 @@
-import { pageOptions } from '../data';
 import { CopyButton } from './CopyButton';
 import { FileChipRow } from './FileChipRow';
 
@@ -22,22 +21,8 @@ export function Header({
           <h1 className="text-sm font-medium lg:text-base">Letter of Recommendation Brief — Sebastian Suarez-Solis</h1>
           <p className="hidden text-center font-mono text-xs uppercase tracking-wider text-neutral-400 lg:block">Private • 2026</p>
           <div className="flex items-center justify-start gap-2 lg:justify-end">
-            <label className="inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-neutral-300">
-              Page
-              <select
-                value={selectedPath}
-                onChange={(e) => window.location.assign(e.target.value)}
-                className="rounded-none border border-neutral-700 bg-neutral-900 px-2 py-1 text-neutral-100"
-              >
-                {pageOptions.map((page) => (
-                  <option key={page.path} value={page.path}>
-                    {page.label}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <button onClick={() => window.print()} className="rounded-none border border-neutral-700 px-2 py-1 text-xs hover:bg-neutral-800">Print</button>
             <CopyButton text={coreParagraph} onCopied={onCopied} label="Copy core paragraph" />
+            <button onClick={() => window.print()} className="rounded-none border border-neutral-700 px-2 py-1 text-xs hover:bg-neutral-800">Print</button>
           </div>
         </div>
         <FileChipRow assetBase={assetBase} onOpen={onOpen} />

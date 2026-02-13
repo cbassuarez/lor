@@ -68,6 +68,41 @@ export function RecLetterBriefPage({ targetId }: { targetId: TargetId }) {
     };
   }, []);
 
+  useEffect(() => {
+    const previousTitle = document.title;
+    document.title =
+      targetId === 'utpb'
+        ? 'Letter Brief — Sebastian Suarez-Solis (UTPB)'
+        : 'Letter Brief — Sebastian Suarez-Solis (Composition/Music Tech)';
+
+    const faviconHref = '/rec/favicon-rec.svg';
+    let iconLink = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
+    const previousIconHref = iconLink?.getAttribute('href');
+    let created = false;
+
+    if (!iconLink) {
+      iconLink = document.createElement('link');
+      iconLink.rel = 'icon';
+      document.head.appendChild(iconLink);
+      created = true;
+    }
+
+    iconLink.setAttribute('href', faviconHref);
+
+    return () => {
+      document.title = previousTitle;
+      if (iconLink) {
+        if (previousIconHref) {
+          iconLink.setAttribute('href', previousIconHref);
+        } else if (created) {
+          iconLink.remove();
+        } else {
+          iconLink.removeAttribute('href');
+        }
+      }
+    };
+  }, [targetId]);
+
   const showCopied = () => {
     setToast(true);
     window.setTimeout(() => setToast(false), 1500);
