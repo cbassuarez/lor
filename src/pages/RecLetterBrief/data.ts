@@ -5,6 +5,7 @@ export const REC_UTPB_PATH = `/rec/${REC_UTPB_SLUG}/`;
 export const REC_COMP_PATH = `/rec/${REC_COMP_SLUG}/`;
 
 export type TargetId = 'utpb' | 'comp';
+export type PaneKey = 'overview' | 'claims' | 'kit';
 
 export const pageOptions = [
   { label: 'UT Permian Basin (AP / Percussion Director)', path: REC_UTPB_PATH, targetId: 'utpb' as const },
@@ -38,7 +39,9 @@ export const sharedContent = {
     'In sum, I recommend Sebastian with confidence. They are a reliable, collegial collaborator with a clear trajectory and the rare ability to connect artistic goals to concrete systems and outcomes. I believe they would contribute immediately to your students and faculty culture while also building durable work over the long term.',
 };
 
-export const contentByTarget: Record<TargetId, { emphasis: string[]; roleParagraph: string; logistics: { school: string; deadline: string; upload: string }[] }> = {
+type Logistics = { school: string; deadline: string; upload: string; contact: string };
+
+export const contentByTarget: Record<TargetId, { emphasis: string[]; roleParagraph: string; logistics: Logistics[] }> = {
   utpb: {
     emphasis: [
       'Teaching leadership + curriculum design (syllabi/rubrics; critique cycles; clear outcomes).',
@@ -55,6 +58,7 @@ export const contentByTarget: Record<TargetId, { emphasis: string[]; roleParagra
         school: 'UT Permian Basin — AP / Percussion Director',
         deadline: 'TODO: add deadline',
         upload: 'TODO: add portal upload steps for recommenders',
+        contact: 'TODO: add contact name/email',
       },
     ],
   },
@@ -74,63 +78,131 @@ export const contentByTarget: Record<TargetId, { emphasis: string[]; roleParagra
         school: 'Composition + Music Tech (various)',
         deadline: 'TODO: add school-specific deadlines',
         upload: 'TODO: add upload links/instructions per school',
+        contact: 'TODO: add contact name/email',
       },
     ],
   },
 };
+
+const claimLink = (filename: string) => filename;
 
 export const claims = [
   {
     claim:
       'Sebastian Suarez-Solis is a composer-performer working at the intersection of percussion, interactive media, and spatialized electroacoustic practice.',
     evidence: [
-      'Composer-performer practice spanning percussion, interactive media, and spatial work.',
-      'Recent major works and portfolio materials organized for fast citation.',
+      'Recent large-format works pair acoustic performance with spatialized electronic systems.',
+      'Portfolio materials are organized for quick citation in letters.',
     ],
-    links: ['Works list PDF', 'Submission packet PDF'],
-    chips: ['Performance', 'Research'],
+    link: claimLink('Suarez-Solis_Sebastian_Works_List.pdf'),
   },
   {
     claim:
       'As an educator, they build transferable technique – mapping shared physical concepts across instruments so students can write and perform idiomatically across the percussion family.',
     evidence: [
-      'Transfer-based percussion pedagogy centered on technique that generalizes across instruments.',
-      'Iterative score labs and reading sessions that treat revision as core skill.',
+      'Graduate and undergraduate teaching includes writing-focused labs with iterative critique.',
+      'Supervision model supports applied transfer across instruments and ensemble settings.',
     ],
-    links: ['Teaching portfolio PDF'],
-    chips: ['Teaching'],
+    link: claimLink('Suarez-Solis_Sebastian_Teaching_Portfolio.pdf'),
   },
   {
     claim:
       'They have proven, end-to-end leadership by founding and directing a CC-BY 4.0 nonprofit sample library, publishing 5TB of recordings with 25 artists and sustaining real audience reach through nonprofit infrastructure.',
     evidence: [
-      'Founder/director of a CC-BY 4.0 nonprofit publishing multi-terabyte releases.',
-      'Sustained delivery with multi-artist coordination and public-facing operations.',
+      'The CV documents sustained operational leadership and publication continuity.',
+      'Work includes multi-artist coordination, production timelines, and public distribution.',
     ],
-    links: ['CV PDF'],
-    chips: ['Service'],
+    link: claimLink('Suarez-Solis_Sebastian_CV.pdf'),
   },
   {
     claim:
       'They build artist tools that make practice legible and shareable – e.g., Praetorius (audio-linked PDFs / responsive portfolio workflow) and Tenney (just-intonation tuner + lattice up to 31-limit), alongside related systems.',
     evidence: [
-      'Tool-building that converts complex creative workflows into legible systems.',
-      'Demonstrated software outputs across tuning, publishing, and rehearsal systems.',
+      'Software materials capture concrete tools used in rehearsal, tuning, and publishing.',
+      'Artifacts tie implementation details to musical outcomes without marketing framing.',
     ],
-    links: ['Software one-pager PDF', 'Submission packet PDF'],
-    chips: ['Software'],
+    link: claimLink('Software_OnePager.pdf'),
   },
-];
+] as const;
 
 export const throughLine = {
   label: 'Through-line',
-  body: 'Through-line: their work asks how systems produce space—bridging cybernetics, immanence, and “production of space” across composition, performance, and tooling.',
-  evidence: [
-    'Research framing connects cybernetics + production of space to practice-based work.',
-    'Portfolio and writing samples emphasize method-to-artifact continuity.',
-  ],
-  links: ['Writing samples PDF'],
-  chips: ['Research'],
+  claim: 'Their work asks how systems produce space—bridging cybernetics, immanence, and “production of space” across composition, performance, and tooling.',
+  evidence: ['Writing samples and dissertation materials show method-to-artifact continuity.'],
+  link: 'Writing_Samples.pdf',
 };
 
-export const contact = { email: 'TODO-replace@example.com' };
+export const highlights = {
+  software: [
+    {
+      title: 'SyncTimer',
+      what: 'Rehearsal synchronization tool for shared timing references.',
+      bullets: ['Demonstrates timeline-focused ensemble workflow.', 'What to cite: reliability for rehearsal coordination.', 'Where to click: Software one-pager.'],
+      link: 'Software_OnePager.pdf',
+    },
+    {
+      title: 'Tenney',
+      what: 'Just-intonation tuner and lattice utility up to 31-limit.',
+      bullets: ['Demonstrates tuning practice support.', 'What to cite: concrete ear-training + intonation workflow.', 'Where to click: Software one-pager.'],
+      link: 'Software_OnePager.pdf',
+    },
+    {
+      title: 'Viable Prompt Protocol',
+      what: 'Protocol framing for consistent prompt-driven creative iteration.',
+      bullets: ['Demonstrates process documentation and revision discipline.', 'What to cite: repeatable studio workflow.', 'Where to click: Software one-pager.'],
+      link: 'Software_OnePager.pdf',
+    },
+    {
+      title: 'Praetorius',
+      what: 'Audio-linked PDF + responsive portfolio publishing workflow.',
+      bullets: ['Demonstrates publication pipeline design.', 'What to cite: artist-facing documentation system.', 'Where to click: Software one-pager.'],
+      link: 'Software_OnePager.pdf',
+    },
+    {
+      title: 'Flux',
+      what: 'Reactive score and process system for performance contexts.',
+      bullets: ['Demonstrates compositional system design.', 'What to cite: linkage between score logic and live execution.', 'Where to click: Submission packet.'],
+      link: 'Suarez-Solis_Sebastian_Submission_Packet.pdf',
+    },
+  ],
+  music: [
+    {
+      title: 'CONSTRUCTIONS',
+      what: 'Large-format compositional work integrating performance and spatial logic.',
+      bullets: ['Demonstrates formal control in large forms.', 'What to cite: composition + performance integration.', 'Where to click: Music reel.'],
+      link: 'Music_Reel.pdf',
+    },
+    {
+      title: 'AMPLIFICATIONS',
+      what: 'Performance-installation work centered on mediated sound behavior.',
+      bullets: ['Demonstrates interactive media framing.', 'What to cite: installation-aware performance design.', 'Where to click: Music reel.'],
+      link: 'Music_Reel.pdf',
+    },
+    {
+      title: 'Organum quadruplum “lux nova”',
+      what: 'Composition/performance project connecting historical reference and contemporary process.',
+      bullets: ['Demonstrates stylistic range with structural clarity.', 'What to cite: research-informed composition output.', 'Where to click: Submission packet.'],
+      link: 'Suarez-Solis_Sebastian_Submission_Packet.pdf',
+    },
+  ],
+  research: [
+    {
+      title: 'Embodied Manifestations of Space',
+      what: 'Dissertation portfolio strand focused on production-of-space inquiry.',
+      bullets: ['Demonstrates coherence between writing and practice.', 'What to cite: explicit theoretical framing in creative work.', 'Where to click: Writing samples.'],
+      link: 'Writing_Samples.pdf',
+    },
+    {
+      title: 'Studio-and-lab pedagogy',
+      what: 'Teaching model using iterative prototypes, critique, and revision cycles.',
+      bullets: ['Demonstrates methodical mentoring structure.', 'What to cite: assessment clarity and process accountability.', 'Where to click: Teaching portfolio.'],
+      link: 'Suarez-Solis_Sebastian_Teaching_Portfolio.pdf',
+    },
+    {
+      title: 'Writing for Percussion / Composers’ Forum',
+      what: 'Coursework scope spanning technique, writing practice, and public presentation.',
+      bullets: ['Demonstrates cross-level curricular design.', 'What to cite: evidence of higher-ed teaching continuity.', 'Where to click: Teaching snapshot.'],
+      link: 'Teaching_Snapshot.pdf',
+    },
+  ],
+} as const;

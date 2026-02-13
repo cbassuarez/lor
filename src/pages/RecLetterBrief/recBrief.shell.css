@@ -1,0 +1,5 @@
+.recbrief-lock,
+html.recbrief-lock,
+body.recbrief-lock {
+  overflow: hidden;
+}

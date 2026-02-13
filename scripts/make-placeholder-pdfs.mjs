@@ -1,4 +1,4 @@
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const slugs = ['2026-a7c91f', '2026-f13d0c2b'];
@@ -38,8 +38,14 @@ for (const slug of slugs) {
   const base = join('public', 'rec', slug, 'assets');
   mkdirSync(base, { recursive: true });
   for (const file of files) {
-    const text = `BT\n/F1 18 Tf\n72 740 Td\n(Placeholder PDF: ${file}) Tj\n0 -26 Td\n/F1 12 Tf\n(Replace with final file in public/rec/${slug}/assets) Tj\nET`;
-    writeFileSync(join(base, file), pdf(text));
+    const fullPath = join(base, file);
+    if (!existsSync(fullPath)) {
+      const text = `BT\n/F1 18 Tf\n72 740 Td\n(Placeholder PDF: ${file}) Tj\n0 -26 Td\n/F1 12 Tf\n(Replace with final file in public/rec/${slug}/assets) Tj\nET`;
+      writeFileSync(fullPath, pdf(text));
+    }
   }
-  writeFileSync(join('public', 'rec', slug, 'README.txt'), 'Replace placeholder PDFs in /assets with real files; keep filenames stable.\n');
+  const readmePath = join('public', 'rec', slug, 'README.txt');
+  if (!existsSync(readmePath)) {
+    writeFileSync(readmePath, 'Replace placeholder PDFs in /assets with real files; keep filenames stable.\n');
+  }
 }
