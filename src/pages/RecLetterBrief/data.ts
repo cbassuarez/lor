@@ -87,9 +87,9 @@ export const contentByTarget: Record<TargetId, { emphasis: string[]; roleParagra
     logistics: [
       {
         school: 'UT Permian Basin — AP / Percussion Director',
-        deadline: 'TODO: add deadline',
-        upload: 'TODO: add portal upload steps for recommenders',
-        contact: 'TODO: add contact name/email',
+        deadline: 'ROLLING',
+        upload: 'Send directly in an email - happy to discuss confidentiality; UTPB requires applicant-submitted letters',
+        contact: 'ssuarezsolis@calarts.edu',
       },
     ],
   },
@@ -107,9 +107,9 @@ export const contentByTarget: Record<TargetId, { emphasis: string[]; roleParagra
     logistics: [
       {
         school: 'Composition + Music Tech (various)',
-        deadline: 'TODO: add school-specific deadlines',
-        upload: 'TODO: add upload links/instructions per school',
-        contact: 'TODO: add contact name/email',
+        deadline: 'ROLLING',
+        upload: 'send direct email',
+        contact: 'ssuarezsolis@calarts.edu',
       },
     ],
   },
