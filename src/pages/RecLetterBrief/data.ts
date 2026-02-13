@@ -207,19 +207,19 @@ export const highlights = {
       title: 'CONSTRUCTIONS',
       what: 'Large-format compositional work integrating performance and spatial logic.',
       bullets: ['Demonstrates formal control in large forms.', 'Score excerpt, staging documentation, and premiere context.'],
-      link: 'Suarez-Solis_Sebastian_Works_List.pdf',
+      link: 'https://cbassuarez.com/constructions',
     },
     {
       title: 'AMPLIFICATIONS',
       what: 'Performance-installation work centered on mediated sound behavior.',
       bullets: ['Demonstrates interactive media framing.', 'Performance video and spatial setup details.'],
-      link: 'Suarez-Solis_Sebastian_Works_List.pdf',
+      link: 'https://cbassuarez.bandcamp.com/album/amplifications',
     },
     {
       title: 'Organum quadruplum “lux nova”',
       what: 'Composition/performance project connecting historical reference and contemporary process.',
       bullets: ['Demonstrates stylistic range with structural clarity.', 'Instrumentation, duration, and commissioning history.'],
-      link: 'Suarez-Solis_Sebastian_Submission_Packet.pdf',
+      link: 'https://www.youtube.com/watch?v=NSMiudJhIW4',
     },
   ],
   research: [
@@ -239,7 +239,7 @@ export const highlights = {
       title: 'Writing for Percussion / Composers’ Forum',
       what: 'Coursework scope spanning technique, writing practice, and public presentation.',
       bullets: ['Demonstrates cross-level curricular design.', 'Representative student outcomes and assignments.'],
-      link: 'Teaching_Philosophy.pdf',
+      link: 'Suarez-Solis_Sebastian_CV.pdf',
     },
   ],
 } as const;
