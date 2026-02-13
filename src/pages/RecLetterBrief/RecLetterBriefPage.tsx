@@ -276,6 +276,7 @@ export function RecLetterBriefPage({ targetId }: { targetId: TargetId }) {
         onOpen={(label, filename, url) => setModal({ open: true, title: `${label} — ${filename}`, url })}
         onCopied={showCopied}
         coreParagraph={sharedContent.coreParagraph}
+        accentHue={accentHue}
         mobilePane={mobilePane}
         setMobilePane={setMobilePane}
         overview={overviewPane}
