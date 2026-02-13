@@ -39,7 +39,7 @@ export function Header({
               text={coreParagraph}
               onCopied={onCopied}
               label="Copy core paragraph"
-              className="border-white/80 bg-white px-4 py-2 text-sm font-semibold text-neutral-950 hover:bg-neutral-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white focus-visible:ring-0"
+              className="border-white/80 bg-white px-4 py-2 text-sm font-semibold text-neutral-950 !hover:bg-neutral-100 shadow-[0_0_14px_rgba(255,255,255,0.14)] hover:shadow-[0_0_18px_rgba(255,255,255,0.2)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white focus-visible:ring-0"
             />
             <button onClick={() => window.print()} className="rounded-none border border-neutral-700 px-2 py-1 text-xs hover:bg-neutral-800">Print</button>
           </div>
