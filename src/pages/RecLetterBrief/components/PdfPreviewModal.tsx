@@ -39,7 +39,7 @@ export function PdfPreviewModal({ open, title, url, onClose }: { open: boolean; 
           <button onClick={onClose} className="rounded-none border border-neutral-700 p-1 hover:bg-neutral-800"><X className="h-4 w-4" /></button>
         </div>
         <div className="mb-2 flex gap-2">
-          <a href={url} target="_blank" rel="noreferrer" className="rounded-none border border-neutral-700 px-2 py-1 text-xs hover:bg-neutral-800"><ExternalLink className="mr-1 inline h-3.5 w-3.5" />Open</a>
+          <a href={url} target="_blank" rel="noopener noreferrer" className="rounded-none border border-neutral-700 px-2 py-1 text-xs hover:bg-neutral-800"><ExternalLink className="mr-1 inline h-3.5 w-3.5" />Open</a>
           <a href={url} download className="rounded-none border border-neutral-700 px-2 py-1 text-xs hover:bg-neutral-800"><Download className="mr-1 inline h-3.5 w-3.5" />Download</a>
         </div>
         <div className="h-[calc(92dvh-7.5rem)] border border-neutral-700 bg-neutral-900/70">
