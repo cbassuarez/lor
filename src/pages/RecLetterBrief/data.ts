@@ -132,6 +132,12 @@ export const throughLine = {
   link: 'Writing_Samples.pdf',
 };
 
+export const sectionDescriptors = {
+  claims: '5',
+  highlights: '11 cards',
+  kit: '3 paragraphs',
+} as const;
+
 export const highlights = {
   software: [
     {

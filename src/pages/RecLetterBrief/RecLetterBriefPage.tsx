@@ -9,16 +9,19 @@ import {
   claims,
   contentByTarget,
   highlights,
+  sectionDescriptors,
   sharedContent,
   throughLine,
 } from './data';
 import './recBrief.shell.css';
 import './recBrief.print.css';
 import { AppShell } from './components/AppShell';
-import { Card } from './components/Card';
+import { Card, CardHeader } from './components/Card';
+import { Chip } from './components/Chip';
 import { CopyButton } from './components/CopyButton';
 import { Pane } from './components/Pane';
 import { PdfPreviewModal } from './components/PdfPreviewModal';
+import { Section } from './components/Section';
 import { Toast } from './components/Toast';
 
 export function RecLetterBriefPage({ targetId }: { targetId: TargetId }) {
@@ -72,109 +75,139 @@ export function RecLetterBriefPage({ targetId }: { targetId: TargetId }) {
 
   const toFileUrl = (filename: string) => `${assetBase}/${filename}`;
 
-  const highlightCards = useMemo(() => [...highlights.software, ...highlights.music, ...highlights.research], []);
+  const highlightCards = useMemo(
+    () => [
+      ...highlights.software.map((item) => ({ ...item, variant: 'software' as const })),
+      ...highlights.music.map((item) => ({ ...item, variant: 'performance' as const })),
+      ...highlights.research.map((item) => ({ ...item, variant: 'research' as const })),
+    ],
+    [],
+  );
 
   const overviewPane = (
-    <Pane title="Overview & Emphasis" className="h-full">
-      <Card>
-        <h1 className="text-sm font-semibold">{sharedContent.heroTitle}</h1>
-        <p className="mt-1 text-sm text-neutral-300">{sharedContent.heroSubhead}</p>
-        <p className="mt-2 text-xs text-neutral-400">{sharedContent.metadata}</p>
+    <Pane title="Overview & Emphasis" className="h-full" hint="Context and emphasis guidance for the letter.">
+      <Card className="scroll-mt-12">
+        <CardHeader title={sharedContent.heroTitle} />
+        <p className="text-sm text-neutral-300">{sharedContent.heroSubhead}</p>
+        <p className="text-xs text-neutral-400">{sharedContent.metadata}</p>
       </Card>
-      <Card className="mt-2">
-        <h2 className="font-mono text-xs uppercase tracking-wider text-neutral-300">Courses taught (recent)</h2>
-        <ul className="mt-2 list-disc pl-5 text-sm">
-          {sharedContent.courses.map((course) => (
-            <li key={course}>{course}</li>
-          ))}
-        </ul>
-      </Card>
-      <Card className="mt-2">
-        <h2 className="font-mono text-xs uppercase tracking-wider text-neutral-300">Recommended emphasis</h2>
-        <ol className="mt-2 list-decimal pl-5 text-sm">
-          {contentByTarget[targetId].emphasis.map((item) => (
-            <li key={item} className="mb-1">{item}</li>
-          ))}
-        </ol>
-      </Card>
+
+      <Section title="Courses taught (recent)">
+        <Card>
+          <ul className="list-disc pl-4 space-y-1 marker:text-neutral-600 text-[13px] leading-5 text-neutral-200">
+            {sharedContent.courses.map((course) => (
+              <li key={course}>{course}</li>
+            ))}
+          </ul>
+        </Card>
+      </Section>
+
+      <Section title="Recommended emphasis">
+        <Card>
+          <ol className="list-decimal pl-4 space-y-1 marker:text-neutral-600 text-[13px] leading-5 text-neutral-200">
+            {contentByTarget[targetId].emphasis.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ol>
+        </Card>
+      </Section>
     </Pane>
   );
 
   const claimsPane = (
-    <Pane title="Claims & Highlights" className="h-full">
-      <Card>
-        <h2 className="font-mono text-xs uppercase tracking-wider text-neutral-300">5 claims you can safely make (with evidence)</h2>
-        <div className="mt-2 space-y-2">
-          {claims.map((item, index) => (
-            <div key={item.claim} className="rounded-none border border-neutral-700 p-2">
-              <p className="text-sm">{item.claim}</p>
-              <ul className="mt-1 list-disc pl-5 text-xs text-neutral-300">
+    <Pane title="Claims & Highlights" className="h-full" hint="Ready-to-cite claims and recent evidence.">
+      <Section title="5 claims you can safely make" descriptor={sectionDescriptors.claims}>
+        {claims.map((item, index) => (
+          <Card key={item.claim}>
+            <CardHeader
+              title={`Claim ${index + 1}`}
+              action={<CopyButton text={`Claim: ${item.claim}\nEvidence:\n- ${item.evidence.join('\n- ')}`} onCopied={showCopied} label="Copy" className="print-hide" />}
+            />
+            <div className="space-y-1">
+              <p className="text-[11px] font-mono uppercase tracking-wider text-neutral-500">Claim</p>
+              <p className="text-[13px] leading-5 text-neutral-200">{item.claim}</p>
+            </div>
+            <div className="space-y-1">
+              <p className="text-[11px] font-mono uppercase tracking-wider text-neutral-500">Evidence</p>
+              <ul className="pl-4 space-y-1 marker:text-neutral-600 text-[13px] leading-5 text-neutral-200 list-disc">
                 {item.evidence.map((evidence) => (
                   <li key={evidence}>{evidence}</li>
                 ))}
               </ul>
-              <a href={toFileUrl(item.link)} className="mt-1 inline-block text-xs underline">Where to click</a>
-              <div className="mt-2 print-hide">
-                <CopyButton text={`Claim: ${item.claim}\nEvidence:\n- ${item.evidence.join('\n- ')}`} onCopied={showCopied} label={`Copy claim ${index + 1}`} />
-              </div>
             </div>
-          ))}
-          <div className="rounded-none border border-neutral-700 p-2">
-            <p className="font-mono text-xs uppercase tracking-wider">{throughLine.label}</p>
-            <p className="mt-1 text-sm">{throughLine.claim}</p>
-            <ul className="mt-1 list-disc pl-5 text-xs text-neutral-300">
+            <div className="space-y-1">
+              <p className="text-[11px] font-mono uppercase tracking-wider text-neutral-500">Where it shows up</p>
+              <a href={toFileUrl(item.link)} className="inline-block text-xs text-neutral-300 underline">
+                Where to click
+              </a>
+            </div>
+          </Card>
+        ))}
+
+        <Card>
+          <CardHeader title={throughLine.label} subtext="Cross-cutting through-line" />
+          <div className="space-y-1">
+            <p className="text-[11px] font-mono uppercase tracking-wider text-neutral-500">Claim</p>
+            <p className="text-[13px] leading-5 text-neutral-200">{throughLine.claim}</p>
+          </div>
+          <div className="space-y-1">
+            <p className="text-[11px] font-mono uppercase tracking-wider text-neutral-500">Evidence</p>
+            <ul className="pl-4 space-y-1 marker:text-neutral-600 text-[13px] leading-5 text-neutral-200 list-disc">
               {throughLine.evidence.map((evidence) => (
                 <li key={evidence}>{evidence}</li>
               ))}
             </ul>
-            <a href={toFileUrl(throughLine.link)} className="mt-1 inline-block text-xs underline">Where to click</a>
           </div>
-        </div>
-      </Card>
+          <div className="space-y-1">
+            <p className="text-[11px] font-mono uppercase tracking-wider text-neutral-500">Where it shows up</p>
+            <a href={toFileUrl(throughLine.link)} className="inline-block text-xs text-neutral-300 underline">
+              Where to click
+            </a>
+          </div>
+        </Card>
+      </Section>
 
-      <Card className="mt-2">
-        <h2 className="font-mono text-xs uppercase tracking-wider text-neutral-300">Recent work highlights</h2>
-        <div className="mt-2 space-y-2">
-          {highlightCards.map((item) => (
-            <div key={item.title} className="rounded-none border border-neutral-700 p-2">
-              <p className="text-xs font-semibold uppercase tracking-wide">{item.title}</p>
-              <p className="mt-1 text-xs text-neutral-300">{item.what}</p>
-              <ul className="mt-1 list-disc pl-5 text-xs text-neutral-300">
-                {item.bullets.map((bullet) => (
-                  <li key={bullet}>{bullet}</li>
-                ))}
-              </ul>
-              <a href={toFileUrl(item.link)} className="mt-1 inline-block text-xs underline">Where to click</a>
-            </div>
-          ))}
-        </div>
-      </Card>
+      <Section title="Recent work highlights" descriptor={sectionDescriptors.highlights}>
+        {highlightCards.map((item) => (
+          <Card key={item.title}>
+            <CardHeader title={item.title} subtext={item.what} action={<Chip label={item.variant} variant={item.variant} />} />
+            <ul className="pl-4 space-y-1 marker:text-neutral-600 text-[13px] leading-5 text-neutral-200 list-disc">
+              {item.bullets.map((bullet) => (
+                <li key={bullet}>{bullet}</li>
+              ))}
+            </ul>
+            <a href={toFileUrl(item.link)} className="inline-block text-xs text-neutral-300 underline">
+              Where to click
+            </a>
+          </Card>
+        ))}
+      </Section>
     </Pane>
   );
 
   const kitPane = (
-    <Pane title="Letter kit & Submit" className="h-full">
-      <p className="mb-2 text-xs italic text-neutral-400 lg:hidden">You may want to skim Overview/Claims first.</p>
-      <Card>
-        <h2 className="font-mono text-xs uppercase tracking-wider text-neutral-300">Letter-writing kit (copy-ready paragraphs)</h2>
-        <ParagraphCard text={sharedContent.coreParagraph} onCopied={showCopied} />
-        <ParagraphCard text={contentByTarget[targetId].roleParagraph} onCopied={showCopied} />
-        <ParagraphCard text={sharedContent.closingStarter} onCopied={showCopied} />
-      </Card>
-      <Card className="mt-2">
-        <h2 className="font-mono text-xs uppercase tracking-wider text-neutral-300">How to submit letters</h2>
-        <ul className="mt-2 space-y-2 text-xs">
-          {contentByTarget[targetId].logistics.map((item) => (
-            <li key={item.school} className="rounded-none border border-neutral-700 p-2">
-              <p>{item.school}</p>
-              <p>Deadline: {item.deadline}</p>
-              <p>Where/how to upload: {item.upload}</p>
-              <p>Contact: {item.contact}</p>
-            </li>
-          ))}
-        </ul>
-        <p className="mt-2 text-xs italic">If you need 2 bullet examples from recent work to match your emphasis, text/email me and I’ll send them immediately.</p>
-      </Card>
+    <Pane title="Letter kit & Submit" className="h-full" hint="Copy-ready paragraphs and submission logistics.">
+      <p className="border border-neutral-800 bg-neutral-900/40 p-2 text-xs text-neutral-300 lg:hidden">You may want to skim Overview/Claims first.</p>
+
+      <Section title="Letter-writing kit" descriptor={sectionDescriptors.kit}>
+        <ParagraphCard title="Paragraph 1" text={sharedContent.coreParagraph} onCopied={showCopied} className="scroll-mt-12" />
+        <ParagraphCard title="Paragraph 2" text={contentByTarget[targetId].roleParagraph} onCopied={showCopied} />
+        <ParagraphCard title="Paragraph 3" text={sharedContent.closingStarter} onCopied={showCopied} />
+      </Section>
+
+      <Section title="How to submit letters">
+        {contentByTarget[targetId].logistics.map((item) => (
+          <Card key={item.school}>
+            <CardHeader title={item.school} />
+            <p className="text-[13px] leading-5 text-neutral-200">Deadline: {item.deadline}</p>
+            <p className="text-[13px] leading-5 text-neutral-200">Where/how to upload: {item.upload}</p>
+            <p className="text-[13px] leading-5 text-neutral-200">Contact: {item.contact}</p>
+          </Card>
+        ))}
+        <Card>
+          <p className="text-xs italic text-neutral-300">If you need 2 bullet examples from recent work to match your emphasis, text/email me and I’ll send them immediately.</p>
+        </Card>
+      </Section>
     </Pane>
   );
 
@@ -198,13 +231,21 @@ export function RecLetterBriefPage({ targetId }: { targetId: TargetId }) {
   );
 }
 
-function ParagraphCard({ text, onCopied }: { text: string; onCopied: () => void }) {
+function ParagraphCard({
+  title,
+  text,
+  onCopied,
+  className = '',
+}: {
+  title: string;
+  text: string;
+  onCopied: () => void;
+  className?: string;
+}) {
   return (
-    <div className="mt-2 rounded-none border border-neutral-700 p-2">
-      <p className="text-xs leading-relaxed text-neutral-200">{text}</p>
-      <div className="mt-2 print-hide">
-        <CopyButton text={text} onCopied={onCopied} />
-      </div>
-    </div>
+    <Card className={className}>
+      <CardHeader title={title} action={<CopyButton text={text} onCopied={onCopied} label="Copy" className="print-hide" />} />
+      <p className="text-[13px] leading-5 text-neutral-200">{text}</p>
+    </Card>
   );
 }
