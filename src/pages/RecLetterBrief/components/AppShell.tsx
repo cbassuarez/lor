@@ -4,8 +4,7 @@ import { Header } from './Header';
 import { PaneSwitch } from './PaneSwitch';
 
 export function AppShell({
-  selectedPath,
-  assetBase,
+  slug,
   onOpen,
   onCopied,
   coreParagraph,
@@ -15,8 +14,7 @@ export function AppShell({
   claims,
   kit,
 }: {
-  selectedPath: string;
-  assetBase: string;
+  slug: string;
   onOpen: (label: string, filename: string, url: string) => void;
   onCopied: () => void;
   coreParagraph: string;
@@ -28,7 +26,7 @@ export function AppShell({
 }) {
   return (
     <main className="recbrief-shell flex h-screen h-[100dvh] flex-col bg-neutral-950 text-neutral-100">
-      <Header selectedPath={selectedPath} assetBase={assetBase} onOpen={onOpen} onCopied={onCopied} coreParagraph={coreParagraph} />
+      <Header slug={slug} onOpen={onOpen} onCopied={onCopied} coreParagraph={coreParagraph} />
       <div className="flex-1 min-h-0 flex flex-col">
         <PaneSwitch value={mobilePane} onChange={setMobilePane} />
         <div className="flex-1 min-h-0 lg:grid lg:grid-cols-12 lg:gap-2 lg:p-2">
