@@ -1,9 +1,7 @@
 import { ArrowUpRight } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import {
-  REC_COMP_PATH,
   REC_COMP_SLUG,
-  REC_UTPB_PATH,
   REC_UTPB_SLUG,
   PaneKey,
   TargetId,
@@ -24,12 +22,14 @@ import { Pane } from './components/Pane';
 import { PdfPreviewModal } from './components/PdfPreviewModal';
 import { Section } from './components/Section';
 import { Toast } from './components/Toast';
+import { isExternalUrl, toInternalUrl } from './utils/url';
 
 export function RecLetterBriefPage({ targetId }: { targetId: TargetId }) {
   const slug = targetId === 'utpb' ? REC_UTPB_SLUG : REC_COMP_SLUG;
-  const selectedPath = targetId === 'utpb' ? REC_UTPB_PATH : REC_COMP_PATH;
-  const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
-  const assetBase = `${basePath}/rec/${slug}/assets`;
+  const accentHue = useMemo(() => {
+    const hues = [190, 215, 245, 275, 305, 25, 45, 120];
+    return hues[Math.floor(Math.random() * hues.length)];
+  }, []);
   const [toast, setToast] = useState(false);
   const [mobilePane, setMobilePane] = useState<PaneKey>('kit');
   const [modal, setModal] = useState<{ open: boolean; title: string; url: string }>({ open: false, title: '', url: '' });
@@ -76,7 +76,7 @@ export function RecLetterBriefPage({ targetId }: { targetId: TargetId }) {
         ? 'Letter Brief — Sebastian Suarez-Solis (UTPB)'
         : 'Letter Brief — Sebastian Suarez-Solis (Composition/Music Tech)';
 
-    const faviconHref = '/rec/favicon-rec.svg';
+    const faviconHref = toInternalUrl('rec/favicon-rec.svg');
     let iconLink = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
     const previousIconHref = iconLink?.getAttribute('href');
     let created = false;
@@ -109,8 +109,11 @@ export function RecLetterBriefPage({ targetId }: { targetId: TargetId }) {
     window.setTimeout(() => setToast(false), 1500);
   };
 
-  const toFileUrl = (link: string) => (link.startsWith('http') ? link : `${assetBase}/${link}`);
-  const isExternal = (link: string) => link.startsWith('http');
+  const toFileUrl = (link: string) => {
+    if (isExternalUrl(link)) return link;
+    const relativePath = link.startsWith('rec/') ? link : `rec/${slug}/assets/${link}`;
+    return toInternalUrl(relativePath);
+  };
 
   const highlightCards = useMemo(
     () => [
@@ -122,7 +125,7 @@ export function RecLetterBriefPage({ targetId }: { targetId: TargetId }) {
   );
 
   const overviewPane = (
-    <Pane title="Overview & Emphasis" className="h-full" hint="Context and emphasis guidance for the letter.">
+    <Pane title="Overview" className="h-full" hint="Context and emphasis guidance for the letter." accentHue={accentHue}>
       <Card className="scroll-mt-12">
         <CardHeader title={sharedContent.heroTitle} />
         <p className="text-sm text-neutral-300">{sharedContent.heroSubhead}</p>
@@ -152,7 +155,7 @@ export function RecLetterBriefPage({ targetId }: { targetId: TargetId }) {
   );
 
   const claimsPane = (
-    <Pane title="Claims & Highlights" className="h-full" hint="Ready-to-cite claims and recent evidence.">
+    <Pane title="Claims" className="h-full" hint="Ready-to-cite claims and recent evidence." accentHue={accentHue}>
       <Section title="5 claims you can safely make" descriptor={sectionDescriptors.claims}>
         {claims.map((item, index) => (
           <Card key={item.claim}>
@@ -176,12 +179,12 @@ export function RecLetterBriefPage({ targetId }: { targetId: TargetId }) {
               <p className="text-[11px] font-mono uppercase tracking-wider text-neutral-500">Where it shows up</p>
               <a
                 href={toFileUrl(item.link)}
-                target={isExternal(item.link) ? '_blank' : undefined}
-                rel={isExternal(item.link) ? 'noopener noreferrer' : undefined}
+                target={isExternalUrl(item.link) ? '_blank' : undefined}
+                rel={isExternalUrl(item.link) ? 'noopener noreferrer' : undefined}
                 className="group inline-flex items-center gap-1 text-xs text-neutral-300 underline"
               >
                 Source material
-                {isExternal(item.link) ? <ArrowUpRight className="h-3.5 w-3.5 opacity-70 transition-opacity group-hover:opacity-100" /> : null}
+                {isExternalUrl(item.link) ? <ArrowUpRight className="h-3.5 w-3.5 opacity-70 transition-opacity group-hover:opacity-100" /> : null}
               </a>
             </div>
           </Card>
@@ -205,12 +208,12 @@ export function RecLetterBriefPage({ targetId }: { targetId: TargetId }) {
             <p className="text-[11px] font-mono uppercase tracking-wider text-neutral-500">Where it shows up</p>
             <a
               href={toFileUrl(throughLine.link)}
-              target={isExternal(throughLine.link) ? '_blank' : undefined}
-              rel={isExternal(throughLine.link) ? 'noopener noreferrer' : undefined}
+              target={isExternalUrl(throughLine.link) ? '_blank' : undefined}
+              rel={isExternalUrl(throughLine.link) ? 'noopener noreferrer' : undefined}
               className="group inline-flex items-center gap-1 text-xs text-neutral-300 underline"
             >
               Source material
-              {isExternal(throughLine.link) ? <ArrowUpRight className="h-3.5 w-3.5 opacity-70 transition-opacity group-hover:opacity-100" /> : null}
+              {isExternalUrl(throughLine.link) ? <ArrowUpRight className="h-3.5 w-3.5 opacity-70 transition-opacity group-hover:opacity-100" /> : null}
             </a>
           </div>
         </Card>
@@ -227,12 +230,12 @@ export function RecLetterBriefPage({ targetId }: { targetId: TargetId }) {
             </ul>
             <a
               href={toFileUrl(item.link)}
-              target={isExternal(item.link) ? '_blank' : undefined}
-              rel={isExternal(item.link) ? 'noopener noreferrer' : undefined}
+              target={isExternalUrl(item.link) ? '_blank' : undefined}
+              rel={isExternalUrl(item.link) ? 'noopener noreferrer' : undefined}
               className="group inline-flex items-center gap-1 text-xs text-neutral-300 underline"
             >
               Source material
-              {isExternal(item.link) ? <ArrowUpRight className="h-3.5 w-3.5 opacity-70 transition-opacity group-hover:opacity-100" /> : null}
+              {isExternalUrl(item.link) ? <ArrowUpRight className="h-3.5 w-3.5 opacity-70 transition-opacity group-hover:opacity-100" /> : null}
             </a>
           </Card>
         ))}
@@ -241,7 +244,7 @@ export function RecLetterBriefPage({ targetId }: { targetId: TargetId }) {
   );
 
   const kitPane = (
-    <Pane title="Letter kit & Submit" className="h-full" hint="Copy-ready paragraphs and submission logistics.">
+    <Pane title="Letter kit" className="h-full" hint="Copy-ready paragraphs and submission logistics." accentHue={accentHue}>
       <p className="border border-neutral-800 bg-neutral-900/40 p-2 text-xs text-neutral-300 lg:hidden">You may want to skim Overview/Claims first.</p>
 
       <Section title="Letter-writing kit" descriptor={sectionDescriptors.kit}>
@@ -269,8 +272,7 @@ export function RecLetterBriefPage({ targetId }: { targetId: TargetId }) {
   return (
     <>
       <AppShell
-        selectedPath={selectedPath}
-        assetBase={assetBase}
+        slug={slug}
         onOpen={(label, filename, url) => setModal({ open: true, title: `${label} — ${filename}`, url })}
         onCopied={showCopied}
         coreParagraph={sharedContent.coreParagraph}

@@ -1,17 +1,19 @@
 import { FileChipRow } from './FileChipRow';
 
 export function TopChrome({
-  assetBase,
+  slug,
   selectedPath,
   onOpen,
+  onOpenPalette,
 }: {
-  assetBase: string;
+  slug: string;
   selectedPath: string;
   onOpen: (label: string, filename: string, url: string) => void;
+  onOpenPalette: () => void;
 }) {
   return (
     <header className="space-y-2 border-b border-neutral-700 pb-3">
-      <FileChipRow assetBase={assetBase} onOpen={onOpen} />
+      <FileChipRow slug={slug} onOpen={onOpen} onOpenPalette={onOpenPalette} />
       <div className="flex justify-end gap-2">
         <button onClick={() => window.print()} className="rounded-none border border-neutral-700 px-2 py-1 font-mono text-xs uppercase tracking-wider hover:bg-neutral-800">Print</button>
         <label className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-neutral-300">
