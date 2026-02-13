@@ -13,14 +13,13 @@ export const pageOptions = [
 ];
 
 export const fileDefs = [
-  { key: 'cv', label: 'CV', filename: 'Suarez-Solis_Sebastian_CV.pdf' },
-  { key: 'submission', label: 'Submission packet', filename: 'Suarez-Solis_Sebastian_Submission_Packet.pdf' },
-  { key: 'teaching', label: 'Teaching portfolio', filename: 'Suarez-Solis_Sebastian_Teaching_Portfolio.pdf' },
-  { key: 'works', label: 'Works list', filename: 'Suarez-Solis_Sebastian_Works_List.pdf' },
-  { key: 'software', label: 'Software one-pager', filename: 'Software_OnePager.pdf' },
-  { key: 'writing', label: 'Writing samples', filename: 'Writing_Samples.pdf' },
-  { key: 'music', label: 'Music reel', filename: 'Music_Reel.pdf' },
-  { key: 'snapshot', label: 'Teaching snapshot', filename: 'Teaching_Snapshot.pdf' },
+  { key: 'cv', label: 'CV', type: 'pdf', filename: 'Suarez-Solis_Sebastian_CV.pdf' },
+  { key: 'submission', label: 'Submission packet', type: 'pdf', filename: 'Suarez-Solis_Sebastian_Submission_Packet.pdf' },
+  { key: 'teaching', label: 'Teaching portfolio', type: 'pdf', filename: 'Suarez-Solis_Sebastian_Teaching_Portfolio.pdf' },
+  { key: 'teachingPhilosophy', label: 'Teaching Philosophy', type: 'pdf', filename: 'Teaching_Philosophy.pdf' },
+  { key: 'works', label: 'Works list', type: 'pdf', filename: 'Suarez-Solis_Sebastian_Works_List.pdf' },
+  { key: 'softwareExternal', label: 'Software Projects', type: 'external', url: 'https://example.com/software' },
+  { key: 'writing', label: 'Writing samples', type: 'pdf', filename: 'Writing_Samples.pdf' },
 ] as const;
 
 export const sharedContent = {
@@ -121,7 +120,7 @@ export const claims = [
       'Software materials capture concrete tools used in rehearsal, tuning, and publishing.',
       'Artifacts tie implementation details to musical outcomes without marketing framing.',
     ],
-    link: claimLink('Software_OnePager.pdf'),
+    link: 'https://example.com/software',
   },
 ] as const;
 
@@ -143,31 +142,31 @@ export const highlights = {
     {
       title: 'SyncTimer',
       what: 'Rehearsal synchronization tool for shared timing references.',
-      bullets: ['Demonstrates timeline-focused ensemble workflow.', 'What to cite: reliability for rehearsal coordination.', 'Where to click: Software one-pager.'],
-      link: 'Software_OnePager.pdf',
+      bullets: ['Demonstrates timeline-focused ensemble workflow.', 'Contains: documentation of pedagogical or rehearsal use.'],
+      link: 'https://example.com/software',
     },
     {
       title: 'Tenney',
       what: 'Just-intonation tuner and lattice utility up to 31-limit.',
-      bullets: ['Demonstrates tuning practice support.', 'What to cite: concrete ear-training + intonation workflow.', 'Where to click: Software one-pager.'],
-      link: 'Software_OnePager.pdf',
+      bullets: ['Demonstrates tuning practice support.', 'Contains: source-linked interface demonstrating system design.'],
+      link: 'https://example.com/software',
     },
     {
       title: 'Viable Prompt Protocol',
       what: 'Protocol framing for consistent prompt-driven creative iteration.',
-      bullets: ['Demonstrates process documentation and revision discipline.', 'What to cite: repeatable studio workflow.', 'Where to click: Software one-pager.'],
-      link: 'Software_OnePager.pdf',
+      bullets: ['Demonstrates process documentation and revision discipline.', 'Contains: live interactive demo and technical overview.'],
+      link: 'https://example.com/software',
     },
     {
       title: 'Praetorius',
       what: 'Audio-linked PDF + responsive portfolio publishing workflow.',
-      bullets: ['Demonstrates publication pipeline design.', 'What to cite: artist-facing documentation system.', 'Where to click: Software one-pager.'],
-      link: 'Software_OnePager.pdf',
+      bullets: ['Demonstrates publication pipeline design.', 'Contains: source-linked interface demonstrating system design.'],
+      link: 'https://example.com/software',
     },
     {
       title: 'Flux',
       what: 'Reactive score and process system for performance contexts.',
-      bullets: ['Demonstrates compositional system design.', 'What to cite: linkage between score logic and live execution.', 'Where to click: Submission packet.'],
+      bullets: ['Demonstrates compositional system design.', 'Contains: premiere documentation, instrumentation, and performance context suitable for citation.'],
       link: 'Suarez-Solis_Sebastian_Submission_Packet.pdf',
     },
   ],
@@ -175,19 +174,19 @@ export const highlights = {
     {
       title: 'CONSTRUCTIONS',
       what: 'Large-format compositional work integrating performance and spatial logic.',
-      bullets: ['Demonstrates formal control in large forms.', 'What to cite: composition + performance integration.', 'Where to click: Music reel.'],
-      link: 'Music_Reel.pdf',
+      bullets: ['Demonstrates formal control in large forms.', 'Score excerpt, staging documentation, and premiere context.'],
+      link: 'Suarez-Solis_Sebastian_Works_List.pdf',
     },
     {
       title: 'AMPLIFICATIONS',
       what: 'Performance-installation work centered on mediated sound behavior.',
-      bullets: ['Demonstrates interactive media framing.', 'What to cite: installation-aware performance design.', 'Where to click: Music reel.'],
-      link: 'Music_Reel.pdf',
+      bullets: ['Demonstrates interactive media framing.', 'Performance video and spatial setup details.'],
+      link: 'Suarez-Solis_Sebastian_Works_List.pdf',
     },
     {
       title: 'Organum quadruplum “lux nova”',
       what: 'Composition/performance project connecting historical reference and contemporary process.',
-      bullets: ['Demonstrates stylistic range with structural clarity.', 'What to cite: research-informed composition output.', 'Where to click: Submission packet.'],
+      bullets: ['Demonstrates stylistic range with structural clarity.', 'Instrumentation, duration, and commissioning history.'],
       link: 'Suarez-Solis_Sebastian_Submission_Packet.pdf',
     },
   ],
@@ -195,20 +194,20 @@ export const highlights = {
     {
       title: 'Embodied Manifestations of Space',
       what: 'Dissertation portfolio strand focused on production-of-space inquiry.',
-      bullets: ['Demonstrates coherence between writing and practice.', 'What to cite: explicit theoretical framing in creative work.', 'Where to click: Writing samples.'],
+      bullets: ['Demonstrates coherence between writing and practice.', 'Dissertation framing and research questions.'],
       link: 'Writing_Samples.pdf',
     },
     {
       title: 'Studio-and-lab pedagogy',
       what: 'Teaching model using iterative prototypes, critique, and revision cycles.',
-      bullets: ['Demonstrates methodical mentoring structure.', 'What to cite: assessment clarity and process accountability.', 'Where to click: Teaching portfolio.'],
+      bullets: ['Demonstrates methodical mentoring structure.', 'Course structure, critique method, and assessment model.'],
       link: 'Suarez-Solis_Sebastian_Teaching_Portfolio.pdf',
     },
     {
       title: 'Writing for Percussion / Composers’ Forum',
       what: 'Coursework scope spanning technique, writing practice, and public presentation.',
-      bullets: ['Demonstrates cross-level curricular design.', 'What to cite: evidence of higher-ed teaching continuity.', 'Where to click: Teaching snapshot.'],
-      link: 'Teaching_Snapshot.pdf',
+      bullets: ['Demonstrates cross-level curricular design.', 'Representative student outcomes and assignments.'],
+      link: 'Teaching_Philosophy.pdf',
     },
   ],
 } as const;

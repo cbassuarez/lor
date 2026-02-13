@@ -1,3 +1,4 @@
+import { ArrowUpRight } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import {
   REC_COMP_PATH,
@@ -108,7 +109,8 @@ export function RecLetterBriefPage({ targetId }: { targetId: TargetId }) {
     window.setTimeout(() => setToast(false), 1500);
   };
 
-  const toFileUrl = (filename: string) => `${assetBase}/${filename}`;
+  const toFileUrl = (link: string) => (link.startsWith('http') ? link : `${assetBase}/${link}`);
+  const isExternal = (link: string) => link.startsWith('http');
 
   const highlightCards = useMemo(
     () => [
@@ -172,8 +174,14 @@ export function RecLetterBriefPage({ targetId }: { targetId: TargetId }) {
             </div>
             <div className="space-y-1">
               <p className="text-[11px] font-mono uppercase tracking-wider text-neutral-500">Where it shows up</p>
-              <a href={toFileUrl(item.link)} className="inline-block text-xs text-neutral-300 underline">
-                Where to click
+              <a
+                href={toFileUrl(item.link)}
+                target={isExternal(item.link) ? '_blank' : undefined}
+                rel={isExternal(item.link) ? 'noopener noreferrer' : undefined}
+                className="group inline-flex items-center gap-1 text-xs text-neutral-300 underline"
+              >
+                Source material
+                {isExternal(item.link) ? <ArrowUpRight className="h-3.5 w-3.5 opacity-70 transition-opacity group-hover:opacity-100" /> : null}
               </a>
             </div>
           </Card>
@@ -195,8 +203,14 @@ export function RecLetterBriefPage({ targetId }: { targetId: TargetId }) {
           </div>
           <div className="space-y-1">
             <p className="text-[11px] font-mono uppercase tracking-wider text-neutral-500">Where it shows up</p>
-            <a href={toFileUrl(throughLine.link)} className="inline-block text-xs text-neutral-300 underline">
-              Where to click
+            <a
+              href={toFileUrl(throughLine.link)}
+              target={isExternal(throughLine.link) ? '_blank' : undefined}
+              rel={isExternal(throughLine.link) ? 'noopener noreferrer' : undefined}
+              className="group inline-flex items-center gap-1 text-xs text-neutral-300 underline"
+            >
+              Source material
+              {isExternal(throughLine.link) ? <ArrowUpRight className="h-3.5 w-3.5 opacity-70 transition-opacity group-hover:opacity-100" /> : null}
             </a>
           </div>
         </Card>
@@ -211,8 +225,14 @@ export function RecLetterBriefPage({ targetId }: { targetId: TargetId }) {
                 <li key={bullet}>{bullet}</li>
               ))}
             </ul>
-            <a href={toFileUrl(item.link)} className="inline-block text-xs text-neutral-300 underline">
-              Where to click
+            <a
+              href={toFileUrl(item.link)}
+              target={isExternal(item.link) ? '_blank' : undefined}
+              rel={isExternal(item.link) ? 'noopener noreferrer' : undefined}
+              className="group inline-flex items-center gap-1 text-xs text-neutral-300 underline"
+            >
+              Source material
+              {isExternal(item.link) ? <ArrowUpRight className="h-3.5 w-3.5 opacity-70 transition-opacity group-hover:opacity-100" /> : null}
             </a>
           </Card>
         ))}

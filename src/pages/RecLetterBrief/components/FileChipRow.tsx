@@ -5,6 +5,10 @@ export function FileChipRow({ assetBase, onOpen }: { assetBase: string; onOpen: 
   return (
     <div className="flex gap-2 overflow-x-auto lg:flex-wrap">
       {fileDefs.map((file) => {
+        if (file.type === 'external') {
+          return <FileChip key={file.key} label={file.label} type="external" url={file.url} />;
+        }
+
         const url = `${assetBase}/${file.filename}`;
         return <FileChip key={file.key} label={file.label} filename={file.filename} onClick={() => onOpen(file.label, file.filename, url)} />;
       })}
