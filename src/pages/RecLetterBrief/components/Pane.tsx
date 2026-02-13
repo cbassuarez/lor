@@ -1,10 +1,13 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, ReactNode } from 'react';
+import { PaneHeader } from './PaneHeader';
 
-export function Pane({ title, children, className = '' }: PropsWithChildren<{ title: string; className?: string }>) {
+export function Pane({ title, hint, children, className = '' }: PropsWithChildren<{ title: string; hint?: ReactNode; className?: string }>) {
   return (
-    <section className={`min-h-0 border border-neutral-700 bg-neutral-900/70 backdrop-blur rounded-none ${className}`}>
-      <div className="border-b border-neutral-700 px-3 py-2 font-mono text-xs uppercase tracking-wider">{title}</div>
-      <div className="min-h-0 h-[calc(100%-2.25rem)] overflow-y-auto overscroll-contain [-webkit-overflow-scrolling:touch] p-3">{children}</div>
+    <section className={`min-h-0 rounded-none border border-neutral-700 bg-neutral-900/70 backdrop-blur ${className}`}>
+      <div className="min-h-0 h-full overflow-y-auto overscroll-contain [-webkit-overflow-scrolling:touch]">
+        <PaneHeader title={title} hint={hint} />
+        <div className="space-y-6 p-3">{children}</div>
+      </div>
     </section>
   );
 }
