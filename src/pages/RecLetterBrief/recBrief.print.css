@@ -1,6 +1,25 @@
 @media print {
-  body { background: #fff !important; color: #000 !important; }
-  .rec-brief-page, .rec-brief-page * { color: #000 !important; background: #fff !important; box-shadow: none !important; }
-  .rec-brief-page a[href]::after { content: ' (' attr(href) ')'; font-size: 10px; }
-  .rec-brief-page .print-hide { display: none !important; }
+  html,
+  body,
+  .recbrief-shell {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .recbrief-shell * {
+    color: #000 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+  }
+
+  .recbrief-shell .print-hide {
+    display: none !important;
+  }
+
+  .recbrief-shell [class*='overflow-'] {
+    overflow: visible !important;
+  }
 }

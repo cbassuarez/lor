@@ -17,8 +17,8 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path={REC_UTPB_PATH} element={<RecLetterBriefPage />} />
-      <Route path={REC_COMP_PATH} element={<RecLetterBriefPage />} />
+      <Route path={REC_UTPB_PATH} element={<RecLetterBriefPage targetId="utpb" />} />
+      <Route path={REC_COMP_PATH} element={<RecLetterBriefPage targetId="comp" />} />
     </Routes>
   );
 }
