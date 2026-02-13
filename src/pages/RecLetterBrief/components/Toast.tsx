@@ -1,4 +1,8 @@
-export function Toast({ show, text }: { show: boolean; text: string }) {
+export function Toast({ show, message }: { show: boolean; message: string }) {
   if (!show) return null;
-  return <span className="ml-2 text-xs text-emerald-700">{text}</span>;
+  return (
+    <div className="fixed bottom-4 right-4 z-50 rounded-none border border-neutral-600 bg-neutral-900 px-3 py-2 text-xs text-neutral-100">
+      {message}
+    </div>
+  );
 }
