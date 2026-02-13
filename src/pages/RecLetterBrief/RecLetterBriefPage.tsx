@@ -24,7 +24,8 @@ import { Toast } from './components/Toast';
 export function RecLetterBriefPage({ targetId }: { targetId: TargetId }) {
   const slug = targetId === 'utpb' ? REC_UTPB_SLUG : REC_COMP_SLUG;
   const selectedPath = targetId === 'utpb' ? REC_UTPB_PATH : REC_COMP_PATH;
-  const assetBase = `/rec/${slug}/assets`;
+  const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
+  const assetBase = `${basePath}/rec/${slug}/assets`;
   const [toast, setToast] = useState(false);
   const [mobilePane, setMobilePane] = useState<PaneKey>('kit');
   const [modal, setModal] = useState<{ open: boolean; title: string; url: string }>({ open: false, title: '', url: '' });
