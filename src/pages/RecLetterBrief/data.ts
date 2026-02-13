@@ -18,9 +18,41 @@ export const fileDefs = [
   { key: 'teaching', label: 'Teaching portfolio', type: 'pdf', filename: 'Suarez-Solis_Sebastian_Teaching_Portfolio.pdf' },
   { key: 'teachingPhilosophy', label: 'Teaching Philosophy', type: 'pdf', filename: 'Teaching_Philosophy.pdf' },
   { key: 'works', label: 'Works list', type: 'pdf', filename: 'Suarez-Solis_Sebastian_Works_List.pdf' },
-  { key: 'softwareExternal', label: 'Software Projects', type: 'external', url: 'https://example.com/software' },
+  { key: 'softwarePalette', label: 'Software Projects', type: 'palette' },
   { key: 'writing', label: 'Writing samples', type: 'pdf', filename: 'Writing_Samples.pdf' },
 ] as const;
+
+export const softwarePalette = {
+  label: 'Software Projects',
+  type: 'palette',
+  items: [
+    {
+      title: 'SyncTimer',
+      url: 'https://example.com/synctimer',
+      contains: 'Contains: interactive rehearsal synchronization + cue sheets for ensembles.',
+    },
+    {
+      title: 'Tenney',
+      url: 'https://example.com/tenney',
+      contains: 'Contains: just-intonation practice tools and lattice exploration workflow.',
+    },
+    {
+      title: 'Viable Prompt Protocol',
+      url: 'https://example.com/viable-prompt-protocol',
+      contains: 'Contains: repeatable prompt iteration templates for creative development.',
+    },
+    {
+      title: 'Praetorius',
+      url: 'https://example.com/praetorius',
+      contains: 'Contains: audio-linked PDF publishing workflow with responsive portfolio views.',
+    },
+    {
+      title: 'Flux',
+      url: 'https://example.com/flux',
+      contains: 'Contains: reactive score tooling for live performance process control.',
+    },
+  ],
+} as const;
 
 export const sharedContent = {
   heroTitle: 'Letter of Recommendation Brief — Sebastian Suarez-Solis',

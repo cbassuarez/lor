@@ -6,6 +6,7 @@ const files = [
   'Suarez-Solis_Sebastian_CV.pdf',
   'Suarez-Solis_Sebastian_Submission_Packet.pdf',
   'Suarez-Solis_Sebastian_Teaching_Portfolio.pdf',
+  'Teaching_Philosophy.pdf',
   'Suarez-Solis_Sebastian_Works_List.pdf',
   'Software_OnePager.pdf',
   'Writing_Samples.pdf',
