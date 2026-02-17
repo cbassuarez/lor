@@ -29,7 +29,7 @@ export function Header({
 
   return (
     <>
-      <header className="shrink-0 border-b border-neutral-700 bg-neutral-950">
+      <header className="shrink-0 border-b border-neutral-700 bg-neutral-950 pt-[env(safe-area-inset-top)]">
         <div className="flex flex-col gap-2 px-3 py-2 lg:px-4">
           <div className="grid items-center gap-2 lg:grid-cols-[1fr_auto_1fr]">
           <h1 className="text-sm font-medium lg:text-base">Letter of Recommendation Brief — Sebastian Suarez-Solis</h1>

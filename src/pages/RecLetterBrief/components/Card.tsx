@@ -8,8 +8,8 @@ export function CardHeader({ title, subtext, action }: { title: string; subtext?
   return (
     <div className="flex items-start justify-between gap-3">
       <div>
-        <h3 className="text-sm font-medium text-neutral-100">{title}</h3>
-        {subtext ? <p className="text-xs text-neutral-400">{subtext}</p> : null}
+        <h3 className="text-sm font-medium text-neutral-50 lg:text-neutral-100">{title}</h3>
+        {subtext ? <p className="text-xs text-neutral-400 lg:text-neutral-400">{subtext}</p> : null}
       </div>
       {action}
     </div>

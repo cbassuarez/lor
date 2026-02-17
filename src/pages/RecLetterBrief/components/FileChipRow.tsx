@@ -12,7 +12,7 @@ export function FileChipRow({
   onOpenPalette: () => void;
 }) {
   return (
-    <div className="flex gap-2 overflow-x-auto lg:flex-wrap">
+    <div className="flex flex-nowrap gap-2 overflow-x-auto [-webkit-overflow-scrolling:touch] lg:flex-wrap lg:overflow-visible">
       {fileDefs.map((file) => {
         if (file.type === 'palette') {
           return <FileChip key={file.key} label={file.label} type="palette" onClick={onOpenPalette} />;
