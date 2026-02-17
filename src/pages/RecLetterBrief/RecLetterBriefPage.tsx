@@ -37,9 +37,32 @@ export function RecLetterBriefPage({ targetId }: { targetId: TargetId }) {
   useEffect(() => {
     document.body.classList.add('recbrief-lock');
     document.documentElement.classList.add('recbrief-lock');
+
+    const rootStyle = document.documentElement.style;
+    const previousRecVh = rootStyle.getPropertyValue('--rec-vh');
+    const viewport = window.visualViewport;
+    const updateRecVh = () => {
+      const height = viewport?.height ?? window.innerHeight;
+      rootStyle.setProperty('--rec-vh', `${height * 0.01}px`);
+    };
+
+    updateRecVh();
+    viewport?.addEventListener('resize', updateRecVh);
+    viewport?.addEventListener('scroll', updateRecVh);
+    window.addEventListener('orientationchange', updateRecVh);
+
     return () => {
       document.body.classList.remove('recbrief-lock');
       document.documentElement.classList.remove('recbrief-lock');
+      viewport?.removeEventListener('resize', updateRecVh);
+      viewport?.removeEventListener('scroll', updateRecVh);
+      window.removeEventListener('orientationchange', updateRecVh);
+
+      if (previousRecVh) {
+        rootStyle.setProperty('--rec-vh', previousRecVh);
+      } else {
+        rootStyle.removeProperty('--rec-vh');
+      }
     };
   }, []);
 

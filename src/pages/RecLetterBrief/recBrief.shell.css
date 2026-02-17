@@ -3,3 +3,8 @@ html.recbrief-lock,
 body.recbrief-lock {
   overflow: hidden;
 }
+
+.recbrief-scroll {
+  touch-action: pan-y;
+}
+

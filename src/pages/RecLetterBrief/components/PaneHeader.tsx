@@ -14,7 +14,7 @@ export function PaneHeader({ title, hint, accentHue }: { title: string; hint?: R
     <div className="sticky top-0 z-10 border-b border-neutral-800 bg-neutral-950/85 px-3 py-2 backdrop-blur">
       <div className="flex flex-col gap-1">
         <p
-          className="inline-flex items-center gap-2 rounded-none px-2 py-1 text-xs font-mono uppercase tracking-wider text-white"
+          className="inline-flex items-center gap-2 rounded-none px-3 py-1.5 text-sm font-mono uppercase tracking-wider text-white lg:px-2 lg:py-1 lg:text-xs"
           style={{
             backgroundColor: `hsl(${accentHue} 90% 60% / ${alpha})`,
             border: `1px solid hsl(${accentHue} 90% 70% / 0.25)`,
@@ -23,7 +23,7 @@ export function PaneHeader({ title, hint, accentHue }: { title: string; hint?: R
         >
           {title}
         </p>
-        {hint ? <p className="text-xs text-neutral-500">{hint}</p> : null}
+        {hint ? <p className="text-xs text-neutral-400 lg:text-neutral-500">{hint}</p> : null}
       </div>
     </div>
   );
