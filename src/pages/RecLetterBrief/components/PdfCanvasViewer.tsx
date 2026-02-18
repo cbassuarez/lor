@@ -1,8 +1,6 @@
-import * as pdfjs from 'pdfjs-dist';
 import type { PDFDocumentProxy, PDFPageProxy, RenderTask } from 'pdfjs-dist/types/src/display/api';
 import { useEffect, useMemo, useRef, useState } from 'react';
-
-pdfjs.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.min.mjs', import.meta.url).toString();
+import { normalizePdfJsUrl, pdfjs } from '../../../lib/pdfjs';
 
 type PdfCanvasViewerProps = {
   url: string;
@@ -20,10 +18,11 @@ export function PdfCanvasViewer({ url, className, accentHue = 220, onError }: Pd
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [containerWidth, setContainerWidth] = useState(0);
+  const pdfUrl = useMemo(() => normalizePdfJsUrl(url), [url]);
 
   useEffect(() => {
     let cancelled = false;
-    const loadingTask = pdfjs.getDocument(url);
+    const loadingTask = pdfjs.getDocument({ url: pdfUrl });
 
     setLoading(true);
     setError(null);
@@ -60,7 +59,7 @@ export function PdfCanvasViewer({ url, className, accentHue = 220, onError }: Pd
         return null;
       });
     };
-  }, [onError, url]);
+  }, [onError, pdfUrl]);
 
   useEffect(() => {
     const node = containerRef.current;
